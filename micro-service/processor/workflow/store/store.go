@@ -53,9 +53,9 @@ func Trigger(esClient *es.ESClient, textDetection []model.TextDetections) *model
 }
 
 func NewText(esSuggestResponse model.ESSuggestResponse, originalText string) string {
-	mySugestion := esSuggestResponse.Suggestion.MySuggestion
+	mySuggestion := esSuggestResponse.Suggestion.MySuggestion
 
-	for _, suggestion := range mySugestion {
+	for _, suggestion := range mySuggestion {
 		word := suggestion.Text
 
 		for _, opt := range suggestion.Options {

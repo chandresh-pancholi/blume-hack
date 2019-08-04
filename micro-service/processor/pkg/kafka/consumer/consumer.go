@@ -24,7 +24,7 @@ func NewKafkaConsumer(groupID string, esClient *elasticsearch.ESClient) (sarama.
 	kafkaConfig.ClientID = groupID //Client Id
 	kafkaConfig.Consumer.Group.Rebalance.Strategy = sarama.BalanceStrategyRoundRobin
 
-	consumerGroup, err := sarama.NewConsumerGroup([]string{"localhost:9092"}, groupID, kafkaConfig)
+	consumerGroup, err := sarama.NewConsumerGroup([]string{"35.206.116.196:9092"}, groupID, kafkaConfig)
 	if err != nil {
 		return nil, nil, err
 	}

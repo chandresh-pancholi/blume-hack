@@ -4,7 +4,6 @@ import (
 	"log"
 	"processor/model"
 	es "processor/pkg/elasticsearch/config"
-	"processor/workflow/item"
 	"processor/workflow/store"
 	"strings"
 )
@@ -16,7 +15,7 @@ type DetectWorkflow struct {
 func (dw *DetectWorkflow) Trigger(detect model.DetectText) {
 	textDetection := detect.TextDetections
 
-	index := 0
+	//index := 0
 
 	for idx, td := range detect.TextDetections {
 
@@ -25,14 +24,14 @@ func (dw *DetectWorkflow) Trigger(detect model.DetectText) {
 			log.Printf("triggering store detail workflow")
 			store.Trigger(dw.EsClient, textDetection[0:idx-1])
 
-			index = idx
+			//index = idx
 			break;
 		}
 	}
 
 	log.Printf("triggering item detail workflow")
-
-	td := textDetection[index:]
-	item.Trigger(dw.EsClient, td)
+	//
+	//td := textDetection[index:]
+	//item.Trigger(dw.EsClient, td)
 
 }

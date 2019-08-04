@@ -33,10 +33,11 @@ func Trigger(esClient *es.ESClient, textDetection []model.TextDetections) {
 		newText := store.NewText(*esSuggestResponse, strings.ToLower(tdx.DetectedText))
 
 		token := tokenize(newText)
-		for i := 0; i <= columnSize-2 ; i++{
+		for i := 0; i <= columnSize - 2 ; i++{
 			key := fmt.Sprintf("%s:%s", columnSize-i-1, columnToken[columnSize-i-1])
 			m[key] = token[len(token)- i - 1]
 		}
+
 
 		if isItemComplete(item) {
 			esResponse, err := elasticsearch.Search(esClient, "item-index", "name", item.Name)
@@ -50,8 +51,6 @@ func Trigger(esClient *es.ESClient, textDetection []model.TextDetections) {
 			}
 		}
 	}
-
-
 }
 
 func findOrder(td string) map[int]string {
