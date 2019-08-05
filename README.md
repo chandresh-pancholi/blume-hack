@@ -5,6 +5,7 @@
     Build a platform to extract item & store details from billed receipt
     
  #Tech stack
+ 
        1. AWS API Gateway
        2. Golang
        3. AWS Lambda
