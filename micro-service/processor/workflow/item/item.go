@@ -20,7 +20,7 @@ func Trigger(esClient *es.ESClient, textDetection []model.TextDetections) {
 	columnToken := tokenize(textDetection[0].DetectedText)
 	columnSize := len(columnToken)
 
-	for idx, ct := range columnToken  {
+	for idx, ct := range columnToken {
 		key := fmt.Sprintf("%s:%s", idx, ct)
 		m[key] = ""
 	}
@@ -33,11 +33,10 @@ func Trigger(esClient *es.ESClient, textDetection []model.TextDetections) {
 		newText := store.NewText(*esSuggestResponse, strings.ToLower(tdx.DetectedText))
 
 		token := tokenize(newText)
-		for i := 0; i <= columnSize - 2 ; i++{
+		for i := 0; i <= columnSize-2; i++ {
 			key := fmt.Sprintf("%s:%s", columnSize-i-1, columnToken[columnSize-i-1])
-			m[key] = token[len(token)- i - 1]
+			m[key] = token[len(token)-i-1]
 		}
-
 
 		if isItemComplete(item) {
 			esResponse, err := elasticsearch.Search(esClient, "item-index", "name", item.Name)
@@ -57,13 +56,13 @@ func findOrder(td string) map[int]string {
 	token := tokenize(td)
 	m := make(map[int]string)
 
-	for idx, txt := range token  {
+	for idx, txt := range token {
 		m[idx] = txt
 	}
 	return m
 }
 
-func tokenize(td string) []string  {
+func tokenize(td string) []string {
 	var token []string
 	doc, err := prose.NewDocument(td)
 	if err != nil {
@@ -76,14 +75,14 @@ func tokenize(td string) []string  {
 	return token
 }
 
-func isItemComplete(item *model.Item)  bool {
-	if len(item.Name) == 0  || len(item.Price) == 0 || len(item.Quantity) == 0{
+func isItemComplete(item *model.Item) bool {
+	if len(item.Name) == 0 || len(item.Price) == 0 || len(item.Quantity) == 0 {
 		return false
 	}
 	return true
 }
 
-func reverse(input string) string  {
+func reverse(input string) string {
 	runes := []rune(input)
 	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
 		runes[i], runes[j] = runes[j], runes[i]

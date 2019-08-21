@@ -25,7 +25,7 @@ func (dw *DetectWorkflow) Trigger(detect model.DetectText) {
 			store.Trigger(dw.EsClient, textDetection[0:idx-1])
 
 			//index = idx
-			break;
+			break
 		}
 	}
 

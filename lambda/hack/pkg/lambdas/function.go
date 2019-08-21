@@ -12,8 +12,8 @@ import (
 )
 
 type Handler struct {
-	S3    *s3.S3
-	Rekog *rekognition.Rekognition
+	S3       *s3.S3
+	Rekog    *rekognition.Rekognition
 	Producer sarama.AsyncProducer
 }
 
@@ -48,9 +48,9 @@ func (h Handler) Handle(ctx context.Context, e events.S3Event) ([]rekognition.De
 //Publish is to emit event to Kafka
 func (h Handler) Publish(payload, topic, key string) {
 	h.Producer.Input() <- &sarama.ProducerMessage{
-		Topic:    topic,
-		Key:      sarama.StringEncoder(key),
-		Value:    sarama.StringEncoder(payload),
+		Topic: topic,
+		Key:   sarama.StringEncoder(key),
+		Value: sarama.StringEncoder(payload),
 	}
 }
 

@@ -26,7 +26,7 @@ func Trigger(esClient *es.ESClient, textDetection []model.TextDetections) *model
 			st.Title = SetTitle(newText)
 		} else if len(st.Address) == 0 {
 			if !strings.Contains(newText, "ph") && !strings.Contains(newText, "phone") && !strings.Contains(newText, "tin") {
-				address = fmt.Sprintf("%s %s",address, newText)
+				address = fmt.Sprintf("%s %s", address, newText)
 			} else {
 				st.Address = address
 			}
@@ -97,5 +97,5 @@ func setTinNo(text string) string {
 }
 
 func SetTitle(text string) string {
-	return text;
+	return text
 }

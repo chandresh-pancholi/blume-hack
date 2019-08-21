@@ -15,14 +15,13 @@ import (
 )
 
 type Handler struct {
-	s3 *s3.S3
+	s3    *s3.S3
 	rekog *rekognition2.Rekognition
 }
 
 func (h Handler) Handle(ctx context.Context, e events.S3Event) {
 
 }
-
 
 func main() {
 	s := session.Must(session.NewSession(aws.NewConfig()))
@@ -32,14 +31,12 @@ func main() {
 	reko := rekognition2.New(s)
 
 	h := Handler{
-		s3: s3Session,
+		s3:    s3Session,
 		rekog: reko,
 	}
 
 	lambda.Start(h.Handle)
 }
-
-
 
 //func parseEvent(e events.S3Event) (string, string, error) {
 //	if len(e.Records) == 0 {

@@ -22,7 +22,6 @@ const searchMatch = `
 		}
 	}`
 
-
 func buildSuggestQuery(value ...string) io.Reader {
 	var b strings.Builder
 
